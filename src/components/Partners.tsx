@@ -1,18 +1,19 @@
 import React from "react";
 
+const frontend_url = import.meta.env.VITE_FRONTEND_URL || "../.."
 const partners = [
-  "../../assets/partners/SleepyOwlLogoBlack.png", //sleepy owl logo
-  "../../assets/partners/hudl.webp", //hudl logo
-  "../../assets/partners/Decathlon.png", //decathlon logo
-  "../../assets/partners/momomia.png", //momomia logo
-  "../../assets/partners/HelloSearch.png", //momomia logo
-  "../../assets/partners/careerWill.png", //momomia logo
-  "../../assets/partners/SleepyOwlLogoBlack.png", //sleepy owl logo
-  "../../assets/partners/hudl.webp", //hudl logo
-  "../../assets/partners/Decathlon.png", //decathlon logo
-  "../../assets/partners/momomia.png", //momomia logo
-  "../../assets/partners/HelloSearch.png", //momomia logo
-  "../../assets/partners/careerWill.png", //momomia logo
+  `${frontend_url}/assets/partners/SleepyOwlLogoBlack.png`, // sleepy owl logo
+  `${frontend_url}/assets/partners/hudl.webp`,             // hudl logo
+  `${frontend_url}/assets/partners/Decathlon.png`,         // decathlon logo
+  `${frontend_url}/assets/partners/momomia.png`,           // momomia logo
+  `${frontend_url}/assets/partners/HelloSearch.png`,       // HelloSearch logo
+  `${frontend_url}/assets/partners/careerWill.png`,        // careerWill logo
+  `${frontend_url}/assets/partners/SleepyOwlLogoBlack.png`, // sleepy owl logo
+  `${frontend_url}/assets/partners/hudl.webp`,             // hudl logo
+  `${frontend_url}/assets/partners/Decathlon.png`,         // decathlon logo
+  `${frontend_url}/assets/partners/momomia.png`,           // momomia logo
+  `${frontend_url}/assets/partners/HelloSearch.png`,       // HelloSearch logo
+  `${frontend_url}/assets/partners/careerWill.png`         // careerWill logo
 ];
 
 export const Partners = () => {
