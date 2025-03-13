@@ -1,12 +1,14 @@
 import React from "react";
 
+
+const frontendUrl = import.meta.env.VITE_FRONTEND_URL || "../..";
 const partners = [
-  "../../assets/partners/SleepyOwlLogoBlack.png", // Sleepy owl logo
-  "../../assets/partners/hudl.png", // Hudl logo
-  "../../assets/partners/Decathlon.png", // Decathlon logo
-  "../../assets/partners/momomia.png", // Momomia logo
-  "../../assets/partners/HelloSearch.png", // HelloSearch logo
-  "../../assets/partners/careerWill.png", // CareerWill logo
+  `${frontendUrl}/assets/partners/SleepyOwlLogoBlack.png`, // Sleepy owl logo
+  `${frontendUrl}/assets/partners/hudl.png`, // Hudl logo
+  `${frontendUrl}/assets/partners/Decathlon.png`, // Decathlon logo
+  `${frontendUrl}/assets/partners/momomia.png`, // Momomia logo
+  `${frontendUrl}/assets/partners/HelloSearch.png`, // HelloSearch logo
+  `${frontendUrl}/assets/partners/careerWill.png`, // CareerWill logo
 ];
 
 export const Partners = () => {
