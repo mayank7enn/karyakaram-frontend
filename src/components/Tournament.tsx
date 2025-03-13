@@ -38,19 +38,22 @@ export const Tournaments: React.FC<TournamentsProps> = ({ tournaments }) => {
   }, [tournaments]);
 
   return (
-    <section id="tournaments" className="py-20 bg-[#0B192C]">
+    <section id="tournaments" className="py-12 sm:py-20 bg-[#0B192C]">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white text-center mb-12">
+        {/* Section Title */}
+        <h2 className="text-2xl sm:text-4xl font-bold text-white text-center mb-8 sm:mb-12">
           Recent <span className="text-orange-500">Tournaments</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        {/* Responsive Grid Layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {tournaments.map((tournament, index) => (
             <div
               key={index}
               className="bg-black rounded-lg overflow-hidden hover:transform hover:scale-105 transition duration-500"
             >
               {/* Display one image at a time */}
-              <div className="relative w-full h-48 overflow-hidden">
+              <div className="relative w-full h-48 sm:h-64 overflow-hidden">
                 {tournament.image.map((img, imgIndex) => (
                   <img
                     key={imgIndex}
@@ -61,15 +64,18 @@ export const Tournaments: React.FC<TournamentsProps> = ({ tournaments }) => {
                         ? "opacity-100"
                         : "opacity-0"
                     }`}
+                    loading="lazy" // Lazy load images for better performance
                   />
                 ))}
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">
+              <div className="p-4 sm:p-6">
+                {/* Tournament Title */}
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                   {tournament.title}
                 </h3>
 
-                <div className="flex items-center text-gray-400">
+                {/* Location */}
+                <div className="flex items-center text-xs sm:text-sm text-gray-400">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-4 h-4 mr-2"
