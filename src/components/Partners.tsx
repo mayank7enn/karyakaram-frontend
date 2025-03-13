@@ -2,7 +2,7 @@ import React from "react";
 
 const partners = [
   "../../assets/partners/SleepyOwlLogoBlack.png", // Sleepy owl logo
-  "../../assets/partners/hudl.webp", // Hudl logo
+  "../../assets/partners/hudl.png", // Hudl logo
   "../../assets/partners/Decathlon.png", // Decathlon logo
   "../../assets/partners/momomia.png", // Momomia logo
   "../../assets/partners/HelloSearch.png", // HelloSearch logo
