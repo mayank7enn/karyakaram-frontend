@@ -14,43 +14,31 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
     city: "",
     stravaProfileUrl: "",
   });
-  const frontendUrl = import.meta.env.VITE_FRONTEND_URL || "../.."
 
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Controls visibility for smooth transitions
 
+  // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(import.meta.env.VITE_BACKEND_URL)
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register/event-register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
-
       if (response.ok) {
         setMessage(data.message || "Registration successful!");
         setIsSuccess(true);
         setTimeout(() => {
-          onClose();
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            address: "",
-            state: "",
-            city: "",
-            stravaProfileUrl: "",
-          });
-          setMessage("");
-          setIsSuccess(false);
+          handleClose();
         }, 2000);
       } else {
         setMessage(data.error || "Registration failed. Please try again.");
@@ -63,21 +51,39 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
     }
   };
 
+  // Smoothly close the form with a transition
+  const handleClose = () => {
+    setIsVisible(false); // Start the exit animation
+    setTimeout(() => {
+      onClose(); // Unmount the component after the animation completes
+    }, 300); // Match this duration with the CSS transition duration
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-      <div className="bg-[#1A1F2B] rounded-lg shadow-2xl w-[700px] max-w-[95%]">
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 transition-opacity duration-300 ${
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Smooth Transition Container */}
+      <div
+        className={`bg-[#1A1F2B] rounded-lg shadow-2xl w-[700px] max-w-[95%] overflow-y-auto max-h-[90vh] transform transition-transform duration-300 ${
+          isVisible ? "scale-100" : "scale-95"
+        }`}
+        style={{ maxHeight: "90vh" }}
+      >
         {/* Event Header Section */}
-        <div 
+        <div
           className="bg-cover bg-center rounded-t-lg p-6"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${frontendUrl}/assets/marathon.jpg)`,
-            minHeight: '200px'
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${import.meta.env.VITE_FRONTEND_URL}/assets/marathon.jpg)`,
+            minHeight: "200px",
           }}
         >
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="text-white">
               <h1 className="text-4xl font-bold mb-4 drop-shadow-lg">Virtual Marathon</h1>
-              <p className="text-xl mb-4 drop-shadow-md">📍 Global Participation</p>
+              <p className="text-xl mb-4 drop-shadow-md">📅 Global Participation</p>
               <div className="flex gap-6 text-base">
                 <div>
                   <p className="text-gray-200">Date</p>
@@ -98,7 +104,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
             <h2 className="text-2xl font-bold text-orange-500 mb-6 border-b border-gray-700 pb-4">
               Participant Registration
             </h2>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
@@ -177,17 +182,16 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
                 />
               </div>
             </div>
-
             <div className="flex justify-between items-center">
-              <button 
-                type="button" 
-                onClick={onClose} 
+              <button
+                type="button"
+                onClick={handleClose}
                 className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition"
               >
                 Cancel
               </button>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition"
               >
                 Submit Registration
@@ -200,10 +204,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
         ) : (
           <div className="p-8 text-center">
             <div className="bg-green-500 text-white p-6 rounded-lg shadow-lg">
-              <svg 
-                className="w-16 h-16 mx-auto mb-4" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                className="w-16 h-16 mx-auto mb-4"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
