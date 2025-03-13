@@ -1,40 +1,41 @@
 import React from "react";
 
-const frontend_url = import.meta.env.VITE_FRONTEND_URL || "../.."
 const partners = [
-  `${frontend_url}/assets/partners/SleepyOwlLogoBlack.png`, // sleepy owl logo
-  `${frontend_url}/assets/partners/hudl.webp`,             // hudl logo
-  `${frontend_url}/assets/partners/Decathlon.png`,         // decathlon logo
-  `${frontend_url}/assets/partners/momomia.png`,           // momomia logo
-  `${frontend_url}/assets/partners/HelloSearch.png`,       // HelloSearch logo
-  `${frontend_url}/assets/partners/careerWill.png`,        // careerWill logo
-  `${frontend_url}/assets/partners/SleepyOwlLogoBlack.png`, // sleepy owl logo
-  `${frontend_url}/assets/partners/hudl.webp`,             // hudl logo
-  `${frontend_url}/assets/partners/Decathlon.png`,         // decathlon logo
-  `${frontend_url}/assets/partners/momomia.png`,           // momomia logo
-  `${frontend_url}/assets/partners/HelloSearch.png`,       // HelloSearch logo
-  `${frontend_url}/assets/partners/careerWill.png`         // careerWill logo
+  "../../assets/partners/SleepyOwlLogoBlack.png", // Sleepy owl logo
+  "../../assets/partners/hudl.webp", // Hudl logo
+  "../../assets/partners/Decathlon.png", // Decathlon logo
+  "../../assets/partners/momomia.png", // Momomia logo
+  "../../assets/partners/HelloSearch.png", // HelloSearch logo
+  "../../assets/partners/careerWill.png", // CareerWill logo
 ];
 
 export const Partners = () => {
   return (
-    <section className="bg-black py-12 text-white overflow-hidden">
+    <section className="bg-black py-8 sm:py-12 text-white overflow-hidden">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold text-orange-500 mb-6">Our Partners</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-orange-500 mb-4 sm:mb-6">
+          Our Partners
+        </h2>
       </div>
 
       {/* Scrolling Wrapper */}
       <div className="relative flex overflow-hidden whitespace-nowrap">
         {/* Duplicating the items for smooth infinite scrolling */}
-        <div className="animate-scroll flex gap-8">
-            {[...partners, ...partners].map((partner, index) => (
+        <div className="animate-scroll flex gap-4 sm:gap-8">
+          {[...partners, ...partners].map((partner, index) => (
             <div
               key={index}
-              className="bg-[#0B192C] px-20 py-6 rounded-lg text-white shadow-lg min-w-[300px] text-center"
+              className="bg-[#0B192C] px-4 sm:px-8 py-4 sm:py-6 rounded-lg text-white shadow-lg min-w-[150px] sm:min-w-[300px] text-center"
             >
-              <img src={partner} alt={`Partner ${index}`} className="mx-auto" />
+              {/* Lazy load images and optimize for responsiveness */}
+              <img
+                src={partner}
+                alt={`Partner ${index}`}
+                className="mx-auto max-h-12 sm:max-h-16 w-auto object-contain"
+                loading="lazy" // Lazy load images for better performance
+              />
             </div>
-            ))}
+          ))}
         </div>
       </div>
     </section>
